@@ -1,0 +1,42 @@
+.npm-cache/
+node_modules/
+.venv/
+dist/
+build/
+coverage/
+*.log
+*.tmp
+*.swp
+*.bak
+*.bak[0-9]*
+.DS_Store
+Thumbs.db
+.env
+~$*
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Generated files (keep .gitkeep only)
+output_ppt/*
+!output_ppt/.gitkeep
+output_manifest/*
+!output_manifest/.gitkeep
+
+# Legacy workspace (to be removed)
+workspace/*.pptx
+workspace/*.json
+workspace/slides/*
+!workspace/slides/.gitkeep
+!workspace/replacements.example.json
+
+# User templates (keep sample.pptx and template.pptx only)
+templates/*.pptx
+!templates/sample.pptx
+!templates/template.pptx
+
+# Input files (keep README only)
+input/*
+!input/.gitkeep
+!input/README.md

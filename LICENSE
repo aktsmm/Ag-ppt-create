@@ -1,0 +1,85 @@
+# Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+
+## English
+
+Copyright (c) 2025 aktsmm
+
+This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+**Note**: All scripts in this repository are independently implemented based solely on official documentation from python-pptx and PptxGenJS. No third-party proprietary code is included.
+
+You are free to:
+
+- **Share** — copy and redistribute the material in any medium or format
+- **Adapt** — remix, transform, and build upon the material
+
+Under the following terms:
+
+- **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+  - **Required attribution format**: You must include the following in any use or derivative work:
+    - Original repository URL: https://github.com/aktsmm/Ag-ppt-create
+    - Author name: aktsmm
+    - A statement indicating if changes were made
+- **NonCommercial** — You may not use the material for commercial purposes without explicit written permission.
+- **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
+
+**Additional Restrictions:**
+
+1. **AI Training Data**: This work may not be used to train artificial intelligence models or machine learning systems without explicit written permission.
+2. **Repository URL Requirement**: Any distribution, publication, or derivative work must prominently display the original repository URL.
+3. **Commercial Licensing**: For commercial use, contact aktsmm for licensing arrangements.
+   - If you wish to use this software for commercial purposes, please contact us. We are open to discussion about licensing terms based on your use case.
+   - Contact: GitHub [@aktsmm](https://github.com/aktsmm)
+
+Full license text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+---
+
+## 日本語
+
+Copyright (c) 2025 aktsmm
+
+この作品はクリエイティブ・コモンズ 表示-非営利-継承 4.0 国際ライセンスの下に提供されています。
+
+**注記**: 本リポジトリのすべてのスクリプトは、python-pptx および PptxGenJS の公式ドキュメントのみを参考に独自実装しています。サードパーティの独自コードは含まれていません。
+
+あなたは以下の条件に従う限り、自由に：
+
+- **共有** — どのようなメディアやフォーマットでも資料を複製・再配布できます
+- **翻案** — 資料をリミックス、変形、および加工することができます
+
+以下の条件に従ってください：
+
+- **表示** — あなたは適切なクレジットを表示し、ライセンスまたはこのレポジトリへのリンクを提供し、変更があったらその旨を示さなければなりません。これらは合理的であればどのような方法で行っても構いませんが、許諾者があなたやあなたの利用行為を支持していると示唆するような方法は除きます。
+  - **必須の表示形式**: 使用または派生物には以下を含める必要があります：
+    - 元のリポジトリ URL: https://github.com/aktsmm/Ag-ppt-create
+    - 著作者名: aktsmm
+    - 変更を加えた場合はその旨の記載
+- **非営利** — 明示的な書面による許可なしに、営利目的でこの資料を利用してはなりません。
+- **継承** — この資料をリミックス、変形、または加工した場合、あなたの貢献部分を元の資料と同じライセンスの下で配布しなければなりません。
+
+**追加制限:**
+
+1. **AI 学習データとしての使用禁止**: 明示的な書面による許可なしに、本作品を人工知能モデルや機械学習システムの学習データとして使用することはできません。
+2. **リポジトリ URL 明記義務**: 配布、公開、派生物作成時には、元のリポジトリ URL を目立つ場所に明示する必要があります。
+3. **商用ライセンス**: 商用利用をご希望の場合は、aktsmm までお問い合わせください。
+   - 本ソフトウェアを商用目的で使用したい場合は、お気軽にご相談ください。用途に応じたライセンス条件について柔軟に対応いたします。
+   - 連絡先: GitHub [@aktsmm](https://github.com/aktsmm)
+
+ライセンス全文: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.ja
+
+---
+
+## Disclaimer / 免責事項
+
+### English
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+### 日本語
+
+本ソフトウェアは「現状のまま」で提供され、明示または黙示を問わず、商品性、特定目的への適合性、および権利非侵害についての保証を含むがこれに限定されない、いかなる種類の保証も伴いません。
+
+**作者または著作権者は、契約行為、不法行為、またはそれ以外であろうと、ソフトウェアに起因または関連し、あるいはソフトウェアの使用またはその他の扱いによって生じる一切の請求、損害、その他の義務について何らの責任も負わないものとします。**
+
+⚠️ **本ソフトウェアの使用は自己責任でお願いします。**
