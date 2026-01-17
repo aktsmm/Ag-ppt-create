@@ -1,0 +1,39 @@
+{
+  // MCP サーバー設定
+  "chat.mcp.autostart": "newAndOutdated",
+  "github.copilot.chat.modelContext": {
+    "priority": ["mcp:Docs"],
+    "include": ["mcp:Docs"]
+  },
+
+  "chat.tools.urls.autoApprove": {
+    "https://ja.wikipedia.org": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://en.wikipedia.org": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://qiita.com": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://zenn.dev": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://learn.microsoft.com": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://github.com": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://techcommunity.microsoft.com": {
+      "approveRequest": true,
+      "approveResponse": true
+    }
+  }
+}

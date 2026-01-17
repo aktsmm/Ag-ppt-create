@@ -1,0 +1,16 @@
+{
+  "slide-0": {
+    "shape-0": {
+      "paragraphs": [
+        { "text": "Title text goes here", "bold": true, "font_size": 32 }
+      ]
+    },
+    "shape-1": {
+      "paragraphs": [
+        { "text": "Bullet 1", "bullet": true, "level": 0 },
+        { "text": "Bullet 2", "bullet": true, "level": 0 },
+        { "text": "Bullet 3", "bullet": true, "level": 0 }
+      ]
+    }
+  }
+}

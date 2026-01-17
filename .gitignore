@@ -1,0 +1,61 @@
+.npm-cache/
+node_modules/
+.venv/
+dist/
+build/
+coverage/
+*.log
+*.tmp
+*.swp
+*.bak
+*.bak[0-9]*
+.DS_Store
+Thumbs.db
+.env
+~$*
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Generated files (keep .gitkeep and README only)
+output_ppt/*
+!output_ppt/.gitkeep
+output_manifest/*
+!output_manifest/.gitkeep
+!output_manifest/README.md
+
+# Legacy workspace (to be removed)
+workspace/*.pptx
+workspace/*.json
+workspace/slides/*
+!workspace/slides/.gitkeep
+!workspace/replacements.example.json
+
+# User templates (keep sample.pptx and template.pptx only)
+templates/*.pptx
+!templates/sample.pptx
+!templates/template.pptx
+templates/taihi/
+
+# Input files (keep README only)
+input/*
+!input/.gitkeep
+!input/README.md
+# Extracted images from PPTX (temporary work files)
+images/*
+!images/.gitkeep
+!images/README.md
+
+# Temporary scripts (project-specific, not for version control)
+scripts_temp/
+!scripts_temp/README.md
+
+# Prompt files (user-specific)
+.github/prompts/
+
+# Azure Update workflow (customer-specific)
+.github/instructions/azure-update-workflow.instructions.md
+output_manifest/_tmp_*.py
+# Skills (local development)
+.github/skills/
