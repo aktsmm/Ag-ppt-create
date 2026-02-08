@@ -24,6 +24,9 @@
 
 ## クイックスタート
 
+> ⚠️ **注意**: 以下の例は **preserve 方式（experimental）** のフローです。推奨は **reconstruct 方式**（`reconstruct_analyzer.py` + `create_from_template.py`）です。
+> 📖 reconstruct 方式の詳細は [tools-reference.instructions.md](tools-reference.instructions.md) を参照（SSOT）。
+
 ```powershell
 # 変数定義
 $base = "20251211_azure_overview_ja"

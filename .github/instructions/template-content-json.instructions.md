@@ -139,7 +139,7 @@ foreach ($img in $images) {
 1. **命名規則**: `{連番}_{内容}.png` （例: `01_auth_flow.png`）
 2. **保存先**: `images/{base}/` 配下に統一
 3. **適切な位置に配置**: Appendix にまとめるのではなく、関連するスライドに直接配置
-4. **type は `photo`**: 画像を含むスライドは `type: "photo"` を使用
+4. **`type: "content"` + `image` を推奨**: 画像を含むスライドは `type: "content"` + `image` フィールドを使用（`photo` は非推奨）
 
 ---
 

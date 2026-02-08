@@ -1,4 +1,8 @@
-```chatagent
+---
+name: json-reviewer
+description: content.jsonの品質レビュー（翻訳品質・構造）を担当
+---
+
 # JSON Reviewer Agent
 
 content.json の品質レビューを担当するエージェント。翻訳後・BUILD 前の品質ゲートとして機能する。
@@ -24,10 +28,10 @@ content.json の品質レビューを担当するエージェント。翻訳後�
 
 ## 入出力契約
 
-| 種別 | パス | 説明 |
-|------|------|------|
+| 種別 | パス                                     | 説明                  |
+| ---- | ---------------------------------------- | --------------------- |
 | 入力 | `output_manifest/{base}_content_ja.json` | 翻訳済み content.json |
-| 出力 | 判定結果 (PASS/WARN/FAIL) | Orchestrator へ返却 |
+| 出力 | 判定結果 (PASS/WARN/FAIL)                | Orchestrator へ返却   |
 
 ---
 
@@ -45,7 +49,7 @@ Step 2: JSON Reviewer Agent（AI 判断）
 ↓
 最終判定（PASS / WARN / FAIL）
 
-````
+```
 
 ### コマンド
 
@@ -56,7 +60,7 @@ python scripts/validate_content.py "output_manifest/{base}_content_ja.json"
 
 # Step 2: AI レビュー（自動検証 PASS 後のみ）
 # → JSON Reviewer Agent を呼び出し
-````
+```
 
 ---
 
@@ -104,7 +108,9 @@ python scripts/validate_content.py "output_manifest/{base}_content_ja.json"
 
 ## 合否判定ルール
 
-> 📖 リトライポリシーは [error-recovery.instructions.md](../instructions/error-recovery.instructions.md) を参照（SSOT）。
+> 📖 リトライポリシー・合否基準の詳細は [error-recovery.instructions.md](../instructions/error-recovery.instructions.md) を参照（SSOT）。
+>
+> 本エージェントでは WARN を以下のように細分化:
 
 | エラー数 | 警告数 | 判定    | アクション           |
 | -------- | ------ | ------- | -------------------- |
@@ -179,7 +185,3 @@ Orchestrator から以下のタイミングで呼び出される:
 - 出典表記ルール: 同上
 - Orchestrator: `.github/agents/orchestrator.agent.md`
 - PPTX レビュー: `.github/agents/pptx-reviewer.agent.md`
-
-```
-
-```

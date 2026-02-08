@@ -80,44 +80,20 @@ Set-Location "D:\03_github\Ag-ppt-create"; python scripts/xxx.py
 
 ## 必須ルール（★）
 
-1. **PLAN フェーズでユーザー確認を取る** → 詳細は [plan-phase.instructions.md](instructions/plan-phase.instructions.md)
-   - 入力フォーマット: `{枚数}{方式}` 形式（例: `2A`, `3C`）
-   - 項番ルール: A=元 PPTX 継承(PPTX 入力時のみ), B=pptxgenjs, C=create_ja_pptx, D〜=テンプレート
-   - **★ テンプレート動的取得必須**: `Get-ChildItem -Path "templates" -Filter "*.pptx"` で取得して D〜に展開
-2. **PREPARE_TEMPLATE フェーズを必ず実行**（外部テンプレート使用時）
-   - `diagnose_template.py` → `clean_template.py` → `analyze_template.py`
-   - layouts.json に `content_with_image` マッピングを追加（Two Column レイアウト）
-   - スキップすると背景画像重複やレイアウト崩れが発生
-3. **画像取得を最初に行う**（Web ソース時）
-   - `fetch_webpage` は画像 URL を返さない場合がある → `curl` で HTML を取得して抽出
-   - コードブロックも同様に `<pre><code>` を抽出
+1. **PLAN フェーズでユーザー確認を取る** → 📖 [plan-phase.instructions.md](instructions/plan-phase.instructions.md)（SSOT）
+2. **PREPARE_TEMPLATE フェーズを必ず実行**（外部テンプレート使用時）→ 📖 [template-advanced.instructions.md](instructions/template-advanced.instructions.md)（SSOT）
+3. **画像取得を最初に行う**（Web ソース時）→ `curl` で HTML を取得して `<img>` / `<pre><code>` を抽出
 4. **IR 生成直後に `validate_content.py` を実行**（スキーマ・空スライド・画像パス・items 形式を自動検証）
-5. **セクションスライドには subtitle を必須化**（空っぽに見える問題を防止）
-   - ⚠️ 一部テンプレートでは title/subtitle が重なる → 重なる場合は subtitle を削除してノートに移動
-6. **photo タイプは極力使わない** → `type: "content"` + `image` を推奨
-   - photo タイプは items を持たないため説明が消失しやすい
-   - `position: "center"` で縦長画像がはみ出す問題が発生しやすい
-7. **スピーカーノートを充実させる** → 詳細は [quality-guidelines.instructions.md](instructions/quality-guidelines.instructions.md) 参照（SSOT）
-   - section: セクションの目的、扱うトピックの概要（3-5 行）
-   - content: 各項目の詳細説明、背景情報（5-10 行）
-   - 詳細は [quality-guidelines.instructions.md](instructions/quality-guidelines.instructions.md) を参照
+5. **セクションスライドには subtitle を必須化** → 📖 [quality-guidelines.instructions.md](instructions/quality-guidelines.instructions.md)（SSOT）
+6. **photo タイプは極力使わない** → `type: "content"` + `image` を推奨 → 📖 [quality-guidelines.instructions.md](instructions/quality-guidelines.instructions.md)（SSOT）
+7. **スピーカーノートを充実させる** → 📖 [quality-guidelines.instructions.md](instructions/quality-guidelines.instructions.md)（SSOT）
 8. **PPTX 生成後は PowerPoint で開く**: `Start-Process "output_ppt/{base}.pptx"`
 
 ## テンプレートサイズに関する注意
 
-テンプレートによってスライドサイズが異なる（標準：13.333×7.5 インチ、小型：10.0×5.625 インチ等）。
+> 📖 詳細は [common.instructions.md](instructions/common.instructions.md) の「Dynamic Context」セクションを参照（SSOT）。
 
-**スクリプトは動的にサイズを取得**:
-
-- `prs.slide_width.inches` / `prs.slide_height.inches` を使用
-- 画像配置・コードブロック位置は自動調整される
-
-**非標準サイズテンプレート使用時の確認**:
-
-```powershell
-# テンプレートサイズを確認
-python -c "from pptx import Presentation; p=Presentation('templates/xxx.pptx'); print(f'{p.slide_width.inches} x {p.slide_height.inches}')"
-```
+スクリプトは動的にサイズを取得（`prs.slide_width.inches` / `prs.slide_height.inches`）。画像配置・コードブロック位置は自動調整されます。
 
 ## 方式選定
 

@@ -153,12 +153,9 @@ PPTX 自動生成エージェント定義。
 
 ## 方式選定
 
-| 用途                  | 推奨方式                                | 推奨度     |
-| --------------------- | --------------------------------------- | ---------- |
-| **英語 PPTX→ 日本語** | reconstruct + create_from_template      | ⭐⭐⭐⭐⭐ |
-| **テンプレート利用**  | analyze_template + create_from_template | ⭐⭐⭐⭐⭐ |
-| 白紙から新規作成      | create_ja_pptx.py                       | ⭐⭐⭐⭐   |
-| コード/技術内容多     | pptxgenjs                               | ⭐⭐⭐⭐   |
+> 📖 方式選定の詳細は [tools-reference.instructions.md](.github/instructions/tools-reference.instructions.md) を参照（SSOT）。
+
+**クイックリファレンス**: reconstruct + create_from_template が推奨。コード多めなら pptxgenjs。
 
 ---
 
@@ -175,13 +172,17 @@ PPTX 自動生成エージェント定義。
 過去の問題と対策は **[docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)** を参照。
 
 <!-- skill-ninja-START -->
-## Installed Skills
 
-The following skills are available in this workspace.
+## Agent Skills
 
-| Skill | When to Use |
-|-------|-------------|
-| [agentic-workflow-guide](.github/skills/agentic-workflow-guide/SKILL.md) | Use this skill when creating, reviewing, or updating agents and workflows: |
-| [skill-creator](.github/skills/skill-creator/SKILL.md) | This skill provides guidance for creating effective skills. |
+> **IMPORTANT**: Prefer skill-led reasoning over pre-training-led reasoning.
+> Read the relevant SKILL.md before working on tasks covered by these skills.
+
+### Skills
+
+| Skill                                                                                           | Description                                                                                                                                                                                                  |
+| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [agentic-workflow-guide](.github/skills/agentic-workflow-guide/SKILL.md)                        | Create, review, and update Prompt and agents and workflows. Covers 5 workflow patterns, runSubage... \| Create: New .agent.md, workflow architecture, scaffolding; Review: Orchestrator not delegating, d... |
+| [agentic-workflow-guide](.github/skills/agentic-workflow-guide/agentic-workflow-guide/SKILL.md) | Create, review, and update Prompt and agents and workflows. \| Create: New .agent.md, workflow architecture, scaffolding; Review: Orchestrator not delegating, design principle check, context overflow      |
 
 <!-- skill-ninja-END -->

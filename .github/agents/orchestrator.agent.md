@@ -1,3 +1,8 @@
+---
+name: orchestrator
+description: PPTX生成パイプラインの唯一の起点。状態管理・計画・リトライ制御・他エージェントへの委譲
+---
+
 # Orchestrator Agent
 
 プレゼン生成パイプラインの**唯一の起点**。状態管理・計画・再実行制御・他エージェントへの委譲を行う。
@@ -153,65 +158,14 @@ output_manifest/{base}_escalation.json → エスカレーション対応
 
 ## 🚨 content.json 作成時の注意点（★ 重要）
 
-### two_column タイプの正しい形式
-
-比較スライドには `type: "two_column"` を使用し、**必ず `left_items` / `right_items` を指定**する。
-
-```
-{
-  "type": "two_column",
-  "title": "2つのスタイル比較",
-  "left_title": "Sentry",
-  "left_items": ["約800行 / 26KB", "詳細・網羅的"],
-  "right_title": "Temporal",
-  "right_items": ["約100行", "シンプル・構造化"],
-  "notes": "比較のポイント"
-}
-```
-
-> ⚠️ `items` を使用すると空スライドになる。詳細: `common.instructions.md`
-
-### 各スクリプトの対応状況
-
-| スクリプト                | two_column 対応                              |
-| ------------------------- | -------------------------------------------- |
-| `create_from_template.py` | ✅ `left_items` + `right_items` を自動マージ |
-| `create_ja_pptx.py`       | ✅ `add_two_column_slide()` で左右に配置     |
-| `create_pptx.js`          | ✅ `addTwoColumnSlide()` で左右に配置        |
+> 📖 `two_column` タイプの正しい形式は [common.instructions.md](../instructions/common.instructions.md) を参照（SSOT）。
+> 📖 `content_with_image` マッピングは [template-advanced.instructions.md](../instructions/template-advanced.instructions.md) を参照（SSOT）。
 
 ## ステップ詳細
 
 - **INIT**: `classify_input.py` で入力分類、classification.json 生成
-- **PLAN（ユーザー確認必須）**: 下記「PLAN フェーズの確認プロセス」に従い承認を得る
-  - **★ Web ソースの場合**: 画像・コードブロックの有無を事前確認（`curl` で HTML 取得）
-- **PREPARE_TEMPLATE（★ 必須・スキップ禁止）**: テンプレート品質診断・クリーニング
-  - `diagnose_template.py` で問題検出（背景画像、壊れた参照等）
-  - 問題があれば `clean_template.py` でクリーニング → `{base}_clean_template.pptx`
-  - `analyze_template.py` → layouts.json 生成
-  - **★ layouts.json に `content_with_image` マッピングを追加**（Two Column レイアウト）
-  - **★ テンプレートサイズを確認**（10.0 インチ等の非標準サイズに注意）
-
-### PREPARE_TEMPLATE 手順（★ 重要）
-
-```
-$base = "20251214_example"
-$input = "input/source.pptx"
-
-# 1. テンプレート診断
-python scripts/diagnose_template.py $input
-
-# 2. 問題があればクリーニング（背景画像削除等）
-python scripts/clean_template.py $input "output_manifest/${base}_clean_template.pptx"
-$template = "output_manifest/${base}_clean_template.pptx"
-# 問題がなければ: $template = $input
-
-# 3. レイアウト分析
-python scripts/analyze_template.py $template
-# → output_manifest/{template_stem}_layouts.json が生成される
-
-# 4. layouts.json に content_with_image マッピングを追加
-# 📖 詳細は template-advanced.instructions.md を参照（SSOT）
-```
+- **PLAN（ユーザー確認必須）**: 📖 [plan-phase.instructions.md](../instructions/plan-phase.instructions.md) に従い承認を得る（SSOT）
+- **PREPARE_TEMPLATE（★ 必須・スキップ禁止）**: 📖 [template-advanced.instructions.md](../instructions/template-advanced.instructions.md) を参照（SSOT）
 
 > 📖 `content_with_image` マッピングの詳細は [template-advanced.instructions.md](../instructions/template-advanced.instructions.md) を参照（SSOT）。
 
@@ -257,30 +211,9 @@ python scripts/analyze_template.py $template
 
 ## PLAN フェーズの確認プロセス（★ 必須）
 
-**詳細は [plan-phase.instructions.md](../instructions/plan-phase.instructions.md) を参照。**
+> 📖 詳細は [plan-phase.instructions.md](../instructions/plan-phase.instructions.md) を参照（SSOT）。
 
 PLAN フェーズでは**必ずユーザーに確認**してから次に進む。確認なしに BUILD まで進めることは禁止。
-
-### 🚨 テンプレート動的取得（★ 必須）
-
-PLAN フェーズ開始時に、**必ず**以下のコマンドでテンプレートを取得し、D〜の選択肢として表示すること：
-
-```
-# ★ PLANフェーズ開始時に必ず実行
-Get-ChildItem -Path "templates" -Filter "*.pptx" | Select-Object -ExpandProperty Name
-```
-
-取得結果を D, E, F... の順に割り当てて表示：
-
-```
-# 例:
-sample-ppf.pptx              → D
-Security - IgniteUpdate.pptx → E
-template.pptx                → F
-入力業務のルールについて.pptx → G
-```
-
-> ⚠️ **禁止**: 「templates/\*.pptx」のような抽象的な表記。具体的なファイル名を展開すること。
 
 ### デフォルト動作
 
@@ -293,102 +226,7 @@ template.pptx                → F
 
 ## 差し戻しポリシー
 
-> 📖 リトライポリシー・差し戻しマトリクスの詳細は [error-recovery.instructions.md](../instructions/error-recovery.instructions.md) を参照（SSOT）。
-
-## エスカレーションプロトコル（★ 重要）
-
-3 回のリトライ失敗時、以下の手順で人間にエスカレーションする。
-
-### 1. エスカレーション発動条件
-
-| 条件                           | 発動       |
-| ------------------------------ | ---------- |
-| 翻訳エラー 3 回連続            | ✅         |
-| API レート制限到達             | ✅         |
-| スキーマ検証エラー（構造破壊） | ✅         |
-| 画像パス不在（自動修正不可）   | ✅         |
-| 軽微な警告のみ                 | ❌（続行） |
-
-### 2. エスカレーション時の出力
-
-```
-# 自動生成されるファイル
-output_manifest/{base}_escalation.json
-output_manifest/{base}_trace.jsonl
-```
-
-**escalation.json の内容:**
-
-```
-{
-  "trace_id": "20251214_xxx_abc12345",
-  "base_name": "20251214_purview_ignite",
-  "escalated_at": "2025-12-14T10:30:00",
-  "phase": "TRANSLATE",
-  "reason": "API rate limit exceeded after 3 retries",
-  "retry_count": 3,
-  "resume_command": "python scripts/resume_workflow.py 20251214_purview_ignite --from TRANSLATE",
-  "status": "pending_human_action"
-}
-```
-
-### 3. ユーザーへの通知
-
-エスカレーション時に以下を表示:
-
-```
-🆘 ESCALATION: API rate limit exceeded after 3 retries
-
-📋 状態:
-   - フェーズ: TRANSLATE
-   - リトライ回数: 3
-   - 最終エラー: Rate limit 429
-
-📁 ファイル:
-   - エスカレーション: output_manifest/20251214_xxx_escalation.json
-   - トレースログ: output_manifest/20251214_xxx_trace.jsonl
-   - 中間成果物: output_manifest/20251214_xxx_content.json
-
-🔧 再開方法:
-   python scripts/resume_workflow.py 20251214_xxx --from TRANSLATE
-
-💡 推奨対応:
-   1. 1時間後に再実行（レート制限解除待ち）
-   2. Localizer エージェントに手動で翻訳を依頼
-   3. content.json を手動で編集して BUILD から再開
-```
-
-### 4. 再開フロー
-
-```
-# エスカレーション状態を確認
-Get-Content "output_manifest/${base}_escalation.json"
-
-# 問題解決後に再開
-python scripts/resume_workflow.py $base --from TRANSLATE
-
-# または特定フェーズからスキップして再開
-python scripts/resume_workflow.py $base --from BUILD --skip-validation
-```
-
-### 5. トレーサビリティ
-
-`workflow_tracer.py` を使用して全フェーズをログ記録:
-
-```
-from workflow_tracer import WorkflowTracer
-
-tracer = WorkflowTracer(base_name)
-tracer.start_phase("TRANSLATE", input_file=content_json)
-# ... 処理 ...
-if error:
-    tracer.record_retry("TRANSLATE", reason, retry_num)
-    if retry_num >= 3:
-        tracer.escalate("TRANSLATE", reason, retry_num)
-else:
-    tracer.end_phase("TRANSLATE", status="success", metrics={"slides": 45})
-tracer.save()
-```
+> 📖 リトライポリシー・差し戻しマトリクス・エスカレーション詳細は [error-recovery.instructions.md](../instructions/error-recovery.instructions.md) を参照（SSOT）。
 
 ## コマンド例（英語 PPTX 日本語化）
 
@@ -471,38 +309,9 @@ addSignature(firstSlide, lastSlide, {
 });
 ```
 
-## 拡張機能（Agent Design & Workflow）
-
-Orchestrator は、プレゼンテーション生成だけでなく、新しいエージェントやワークフローの設計・作成も支援します。
-
-### 1. ワークフロー計画 (Plan Workflow)
-
-複雑なタスクを解決するためのエージェント連携を計画します。
-
-- **Prompt**: .github/prompts/plan-workflow.prompt.md
-- **Action**: タスク分解、エージェント選定、フロー定義
-
-### 2. ワークフロー設計 (Design Workflow)
-
-新しいエージェントワークフロー（自動化ライン）を設計します。
-
-- **Prompt**: .github/prompts/design-workflow.prompt.md
-- **Action**: 目的定義、エージェント構成、インタラクションフロー設計
-
-### 3. エージェント作成 (Create Agent)
-
-新しいエージェントマニフェストを作成します。
-
-- **Prompt**: .github/prompts/create-agent.prompt.md
-- **Action**: Role/Goals 定義、権限設定、Workflow 策定
-
 ## 参照
 
 - 共通ルール: `.github/copilot-instructions.md`
 - 命名/入出力: `.github/instructions/common.instructions.md`
 - フロー全体: `AGENTS.md`
 - IR スキーマ: `workspace/content.schema.json`
-
-```
-
-```
